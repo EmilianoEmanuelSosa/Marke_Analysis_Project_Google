@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'static',
     'django_extensions',
     'rest_framework',
     'django.contrib.admin',
@@ -83,7 +84,7 @@ DATABASES = {
     'NAME': config('DB_NAME'),
     'USER': config('DB_USER'),
     'PASSWORD': config('DB_PASSWORD'),
-    'HOST': 'ep-cold-snowflake-11936244.us-east-2.aws.neon.tech',
+    'HOST': config('DB_HOST'),
     'PORT': '5432',
     'OPTIONS': {
         'sslmode': 'require',
