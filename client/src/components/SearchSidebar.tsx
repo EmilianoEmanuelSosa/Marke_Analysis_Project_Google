@@ -18,7 +18,7 @@ const NavSidebarLinkList = ({
         <ul className='flex flex-col'>
           {Object.keys(links).map(key => (
             <li key={key}>
-              <Link className='px-4 py-2 block' to={`${links[key]}`}>
+              <Link className='px-4 py-2 block' to={`/${links[key]}`}>
                 {key}
               </Link>
            </li>
@@ -34,13 +34,14 @@ export default function Root() {
 
 
   const basicServicesLinks = {
-    'Competidores Cercanos':'/nearby-restaurants',
-    'Categorias':'/categories',
-    'Resenas':'/reviews'
+    'Competidores Cercanos':'',
+    'Categorias':'categories',
+    'Resenas':'reviews',
+    'Usuarios':'users'
   }
 
   const machineLearningServicesLinks = {
-    'Clientes Potenciales':'/potencial-clients',
+    'Clientes Potenciales':'adas',
     'Clasificador de Resenas':'/natural-language-interpreter',
   }
 
@@ -60,23 +61,21 @@ export default function Root() {
       <div>
         <nav>
           <ul>
-            <li>
-              <a className='px-4 py-2 block' href='/csv-loader'>
-                Cargar Datos
-              </a>
-            </li>
-            <li>
-              <Link className='px-4 py-2 block' to={`/settings}`}>
-                Configuracio
-              </Link>
-            </li>
-            <li>
-              <a className='px-4 py-2 block' href='https://streamlit.com'>
-                Dashboard De Streamit
-              </a>
-            </li>
+          <li>
+            <Link className='px-4 py-2 block' to={`/settings}`}>
+              Configuraci
+            </Link>
+          </li>
+          <li>
+            <a className='px-4 py-2 block' href='https://streamlit.com'>
+              Dashboard De Streamit
+            </a>
+          </li>
+
           </ul>
+
         </nav>
+      
       </div>
     </div>
   );

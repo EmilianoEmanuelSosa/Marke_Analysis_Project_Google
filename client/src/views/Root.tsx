@@ -5,11 +5,11 @@ import NavSidebar from '../components/NavSidebar'
 function Root() {
 
   return (
-    <main className="h-screen">
+    <main className="h-screen font-inter">
       <NavBar />
-      <div className="flex">
+      <div className="flex h-[calc(100vh_-_72px)]">
         <NavSidebar />
-        <div id="detail">
+        <div className="w-full h-full bg-[#ECF2F9]">
           <Outlet />
         </div>
       </div>
