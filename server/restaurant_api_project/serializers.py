@@ -8,10 +8,10 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Review
-        fields = '_all_'
+        model = Review
+        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model= User
-        fields = '_all_'
+        model = User
+        fields = '__all__'
