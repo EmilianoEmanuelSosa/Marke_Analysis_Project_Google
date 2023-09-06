@@ -1,7 +1,12 @@
 from django.db import models
 
+# Create your models here.
+class User(models.Model):
+    user_id = models.CharField(max_length=100, primary_key=True)
+    name = models.CharField(max_length=512)
+
 class Restaurant(models.Model):
-    restaurant_id = models.AutoField(primary_key=True)
+    restaurant_id = models.CharField(max_length=100, primary_key=True)
     name = models.CharField(max_length=512)
     address = models.CharField(max_length=512, blank=True, null=True)
     latitude = models.FloatField()
@@ -10,15 +15,10 @@ class Restaurant(models.Model):
     review_count = models.IntegerField()
     categories = models.CharField(max_length=512)
 
-
-class User(models.Model):
-    user_id = models.CharField(max_length=512, primary_key=True)
-    name = models.CharField(max_length=512)
-
-
 class Review(models.Model):
-    user_id = models.CharField(max_length=512)
-    restaurant_id = models.CharField(max_length=512)
-    stars = models.DecimalField(max_digits=3, decimal_places=1)
+    review_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    rating = models.IntegerField()
     text = models.TextField()
-    date = models.DateField()
+    time = models.DateField()
