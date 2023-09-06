@@ -3,8 +3,8 @@ from .models import Restaurant, Review,User
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Restaurant
-        fields = '_all_'
+        model = Restaurant
+        fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

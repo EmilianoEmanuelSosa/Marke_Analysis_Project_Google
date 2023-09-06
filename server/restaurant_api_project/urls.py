@@ -1,10 +1,6 @@
-# from django.urls import path, include
-# from rest_framework import routers
-# from .api import RestaurantViewSet
+from django.urls import path, re_path
+from .api import RestaurantViewSet
 
-# router = routers.DefaultRouter()
-# router.register(r'api/restaurantes', RestaurantViewSet)
-
-# urlpatterns = [
-#     path('', include(router.urls)),
-# ]
+urlpatterns = [
+    path('restaurantes_id/<str:restaurant_id>/', RestaurantViewSet.as_view({'get': 'retrieve'}), name='restaurant-detail'),
+]
