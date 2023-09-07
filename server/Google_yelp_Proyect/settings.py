@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant_api_project',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
