@@ -1,5 +1,5 @@
-import React from 'react'
 import { Link } from "react-router-dom";
+import { ChevronRight } from 'react-feather';
 
 const NavSidebarLinkList = ({
   title,
@@ -18,8 +18,9 @@ const NavSidebarLinkList = ({
         <ul className='flex flex-col'>
           {Object.keys(links).map(key => (
             <li key={key}>
-              <Link className='px-4 py-2 block' to={`${links[key]}`}>
+              <Link className='px-4 py-2 flex items-center justify-between  hover:bg-[#3E3E3E] rounded-lg' to={`${links[key]}`}>
                 {key}
+                <ChevronRight className="w-5"/>
               </Link>
            </li>
           ))}

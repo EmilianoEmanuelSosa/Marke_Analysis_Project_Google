@@ -1,38 +1,62 @@
 {
-  "hash": "c7962178",
-  "browserHash": "c8828558",
+  "hash": "b0290349",
+  "browserHash": "4d030315",
   "optimized": {
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "097bd5cf",
+      "fileHash": "d55c1437",
       "needsInterop": true
     },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "f8505646",
+      "fileHash": "b703f97f",
       "needsInterop": true
     },
     "react-router": {
       "src": "../../node_modules/react-router/dist/index.js",
       "file": "react-router.js",
-      "fileHash": "a5a75b8d",
+      "fileHash": "a5e5025a",
       "needsInterop": false
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.js",
       "file": "react-router-dom.js",
-      "fileHash": "912590b4",
+      "fileHash": "ad3f6147",
       "needsInterop": false
+    },
+    "react-leaflet": {
+      "src": "../../node_modules/react-leaflet/lib/index.js",
+      "file": "react-leaflet.js",
+      "fileHash": "6dcc1329",
+      "needsInterop": false
+    },
+    "react-drag-drop-files": {
+      "src": "../../node_modules/react-drag-drop-files/dist/react-drag-drop-files.esm.js",
+      "file": "react-drag-drop-files.js",
+      "fileHash": "aa3b8c0d",
+      "needsInterop": false
+    },
+    "papaparse": {
+      "src": "../../node_modules/papaparse/papaparse.min.js",
+      "file": "papaparse.js",
+      "fileHash": "5885fd9b",
+      "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-75AF2UL5": {
-      "file": "chunk-75AF2UL5.js"
+    "chunk-NZZMBUN5": {
+      "file": "chunk-NZZMBUN5.js"
     },
-    "chunk-L7APZED3": {
-      "file": "chunk-L7APZED3.js"
+    "chunk-DZXRV6RW": {
+      "file": "chunk-DZXRV6RW.js"
+    },
+    "chunk-ZAUFE7H7": {
+      "file": "chunk-ZAUFE7H7.js"
+    },
+    "chunk-UXIASGQL": {
+      "file": "chunk-UXIASGQL.js"
     }
   }
 }
