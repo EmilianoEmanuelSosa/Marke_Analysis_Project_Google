@@ -1,0 +1,41 @@
+version: '3.10'
+
+services:
+  db:
+    image: postgres:13
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: DB_NAME
+      POSTGRES_USER: DB_USER
+      POSTGRES_PASSWORD: DB_PASSWORD
+
+  django_gunicorn:
+    volumes:
+      - /home/mkm/programin/Marke_Analysis_Project_Google/server:/app/server
+      - /home/mkm/programin/Marke_Analysis_Project_Google/server/staticfiles:/app/server/staticfiles  # Cambiar esta línea
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    environment:
+      GDAL_LIBRARY_PATH: /usr/lib/libgdal.so
+      LD_LIBRARY_PATH: /usr/lib:$LD_LIBRARY_PATH
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+
+volumes:
+  static:
+  server:
+  postgres_data:
