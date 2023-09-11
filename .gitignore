@@ -8,3 +8,5 @@ server/task/migrations/__pycache__
 server/main.ipynb
 a.json
 server/main.ipynb
+entrypoint.sh
+Dockerfile
