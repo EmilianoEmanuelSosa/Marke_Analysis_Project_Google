@@ -1,32 +1,33 @@
 version: '3.10'
 
 services:
-  db:
-    image: postgres:13
+  db_google:
+    container_name: db_google
+    build:
+      context: ./db_google
     env_file:
-      - .env
+      - ./db_google/.env
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      - "./db_google/data/:/var/lib/postgresql/data:rw"
+    expose:
+      - "5432"
 
   django_gunicorn:
+    container_name: django_gunicorn
     volumes:
-      - /home/mkm/programin/Marke_Analysis_Project_Google/server:/app/server
-      - /home/mkm/programin/Marke_Analysis_Project_Google/server/staticfiles:/app/server/staticfiles  # Cambiar esta línea
+      - "./server:/app/server"
+      - "./server/staticfiles:/app/server/staticfiles"
     env_file:
-      - .env
+      - ./server/.env
     build:
-      context: .
-    ports:
-      - "8000:8000"
+      context: ./server/
+    expose:
+      - "8000"
     environment:
       GDAL_LIBRARY_PATH: /usr/lib/libgdal.so
       LD_LIBRARY_PATH: /usr/lib:$LD_LIBRARY_PATH
     depends_on:
-      - db
+      - db_google
 
   nginx:
     build: ./nginx
