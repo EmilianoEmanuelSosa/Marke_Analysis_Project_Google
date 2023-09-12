@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'http://localhost:5173',
     '0.0.0.0'
-    'host32.186-158-236.telmex.net.ar'
+    "186.158.236.32",
 ]
 
 
