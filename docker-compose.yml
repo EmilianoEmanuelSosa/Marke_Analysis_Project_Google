@@ -10,7 +10,7 @@ services:
     volumes:
       - "./db_google/data/:/var/lib/postgresql/data:rw"
     ports:
-      - "5432"
+      - "5432:5432"
 
   django_gunicorn:
     container_name: django_gunicorn
