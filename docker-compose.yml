@@ -9,7 +9,7 @@ services:
       - ./db_google/.env
     volumes:
       - "./db_google/data/:/var/lib/postgresql/data:rw"
-    expose:
+    ports:
       - "5432"
 
   django_gunicorn:
