@@ -1,15 +1,16 @@
-# import pandas as pd
 # from decimal import Decimal
-# from .models import Restaurant, User, Review
+from .models import  User, Restaurant, Review
 # from datetime import date
-# from django.db import IntegrityError
+import csv
+from django.db import transaction
+from django.db import IntegrityError
 
 # # Rutas a los archivos CSV
-# csv_file_path_restaurants = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/restaurants.csv'
-# csv_file_path_reviews = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/reviews.csv'
-# csv_file_path_users = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/users.csv'
+csv_file_path_restaurants = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/restaurants.csv'
+csv_file_path_reviews = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/reviews.csv'
+csv_file_path_users = '/home/mkm/programin/Marke_Analysis_Project_Google/Data/Data_process/users.csv'
 
-# BATCH_SIZE = 10000
+BATCH_SIZE = 1
 
 
 
@@ -76,29 +77,58 @@
 
 
 
-# def import_users_from_csv(file_path):
-#     with open(file_path, 'r') as file:
-#         csv_reader = csv.DictReader(file)
-#         users_to_create = []
-
-#         for row in csv_reader:
-#             # Asegúrate de que los nombres de las columnas coincidan con los del CSV
-#             user = User(
-#                 user_id=row['user_id'],
-#                 name=row['name']
-#             )
-#             users_to_create.append(user)
-
-#             if len(users_to_create) == BATCH_SIZE:
-#                 User.objects.bulk_create(users_to_create)
-#                 users_to_create = []
-
-#         # Inserta cualquier remanente que quede en el último lote
-#         if users_to_create:
-#             User.objects.bulk_create(users_to_create)
 
 
 
+@transaction.atomic
+def import_users_from_csv(file_path):
+    with open(file_path, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        users_to_create = []
 
-# import_reviews_from_csv(csv_file_path_reviews)
+        for row in csv_reader:
+            user = User(
+                user_id=row['user_id'],
+                name=row['name']
+            )
+            users_to_create.append(user)
 
+            if len(users_to_create) == BATCH_SIZE:
+                try:
+                    User.objects.bulk_create(users_to_create, ignore_conflicts=True)
+                except IntegrityError as e:
+                    # Maneja otros errores de integridad aquí, si es necesario
+                    print(f"Error de integridad al crear usuarios: {str(e)}")
+                users_to_create = []
+
+        # Inserta cualquier remanente que quede en el último lote
+        if users_to_create:
+            try:
+                User.objects.bulk_create(users_to_create, ignore_conflicts=True)
+            except IntegrityError as e:
+                # Maneja otros errores de integridad aquí, si es necesario
+                print(f"Error de integridad al crear usuarios: {str(e)}")
+
+
+
+def delete_users_from_csv(file_path):
+    with open(file_path, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        user_ids_to_delete = []
+
+        for row in csv_reader:
+            # Agrega los user_ids que deseas eliminar de la base de datos
+            user_ids_to_delete.append(row['user_id'])
+
+        # Elimina los usuarios correspondientes en la base de datos
+        try:
+            User.objects.filter(user_id__in=user_ids_to_delete).delete()
+        except IntegrityError as e:
+            # Maneja posibles errores de integridad aquí, si es necesario
+            print(f"Error de integridad al eliminar usuarios: {str(e)}")
+
+# delete_users_from_csv(csv_file_path_users)
+
+
+
+import_users_from_csv(csv_file_path_users)

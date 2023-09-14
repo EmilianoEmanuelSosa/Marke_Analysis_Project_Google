@@ -1,0 +1,42 @@
+version: '3.10'
+
+services:
+  db_google:
+    container_name: db_google
+    build:
+      context: ./db_google
+    env_file:
+      - ./db_google/.env
+    volumes:
+      - "./db_google/data/:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+
+  django_gunicorn:
+    container_name: django_gunicorn
+    volumes:
+      - "./server:/app/server"
+      - "./server/staticfiles:/app/server/staticfiles"
+    env_file:
+      - ./server/.env
+    build:
+      context: ./server/
+    expose:
+      - "8000"
+    environment:
+      GDAL_LIBRARY_PATH: /usr/lib/libgdal.so
+      LD_LIBRARY_PATH: /usr/lib:$LD_LIBRARY_PATH
+    depends_on:
+      - db_google
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+
+volumes:
+  static:
+  server:
+  postgres_data:
