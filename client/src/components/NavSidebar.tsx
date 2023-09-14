@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ChevronRight } from 'react-feather';
+import { ChevronRight, File, Settings } from 'react-feather';
+import ConfigBtn from "../views/ConfigBtn";
 
 const NavSidebarLinkList = ({
   title,
@@ -12,7 +13,7 @@ const NavSidebarLinkList = ({
 }) => {
 
   return (
-    <div className='mt-4'>
+    <div className=''>
       <h1 className='text-[#52A2EC] font-bold text-xl'>{title}</h1>
       <nav className='text-[#F2F3F3]'>
         <ul className='flex flex-col'>
@@ -45,10 +46,15 @@ export default function Root() {
     'Clasificador de Resenas':'/natural-language-interpreter',
   }
 
+  const analiticsServicesLinks = {
+    'Reporte de Streamlit':'https://streamlit.com',
+    'Dashboard Interactivo':'/dashboard',
+  }
+
 
   return (
-    <div className="max-w-[300px] w-full h-[calc(100vh_-_72px)] p-4 bg-[#2E2E2E] flex-col flex justify-between">
-      <div>
+    <div className="max-w-[290px] w-full h-[calc(100vh_-_72px)] px-4 py-6 bg-[#2E2E2E] flex-col flex justify-between">
+      <div className="flex flex-col gap-4">
         <NavSidebarLinkList 
           title={'Servicios Basico'}
           links={basicServicesLinks}
@@ -57,24 +63,27 @@ export default function Root() {
           title={'Machine Learning'}
           links={machineLearningServicesLinks}
         />
+         <NavSidebarLinkList 
+          title={'Machine Learning'}
+          links={analiticsServicesLinks}
+        />
       </div>
       <div>
         <nav>
           <ul>
             <li>
               <a className='px-4 py-2 block' href='/csv-loader'>
+                <File />
                 Cargar Datos
               </a>
             </li>
             <li>
-              <Link className='px-4 py-2 block' to={`/settings}`}>
+              <ConfigBtn 
+                className=""
+              >
+                <Settings />
                 Configuracio
-              </Link>
-            </li>
-            <li>
-              <a className='px-4 py-2 block' href='https://streamlit.com'>
-                Dashboard De Streamit
-              </a>
+              </ConfigBtn>
             </li>
           </ul>
         </nav>
