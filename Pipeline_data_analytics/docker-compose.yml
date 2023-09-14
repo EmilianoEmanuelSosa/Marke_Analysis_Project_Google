@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  cassandra:
+    build:
+      context: .
+      dockerfile: Ky_pipeline_data_analitycs/Dockerfile
+    container_name: db_cassandra
+    ports:
+      - "9092:9092"
+    env_file:
+      - ./Ky_pipeline_data_analitycs/.env
+    command: /Ky_pipeline_data_analitycs/entrypoint.sh
+    networks:
+      - mynetwork  # Nombre de la red personalizada
+    depends_on:
+      - kafka
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    expose:
+      - "9042"
+    env_file:
+    - ./kafka/.env
+    networks:
+      - mynetwork
