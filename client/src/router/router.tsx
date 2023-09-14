@@ -6,6 +6,7 @@ import CategoriesView from '../views/CategoriesView';
 import ReviewsView from '../views/ReviewsView';
 import NaturalLanguageInterpreter from '../views/NaturalLanguageInterpreter';
 import PotencialClientsView from '../views/PotencialClientsView';
+import Dashboard from '../views/Dashboard';
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         {
           path: "/potencial-clients",
           element: <PotencialClientsView />,
+        },
+        {
+          path: "/dashboard",
+          element: <Dashboard />,
         },
       ],
     },

@@ -2,6 +2,7 @@ from rest_framework import viewsets, permissions
 from .models import Restaurant, Review, User
 from .serializers import RestaurantSerializer, ReviewSerializer,UserSerializer
 from rest_framework.response import Response
+from .ML_utils import predecir_texto 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all()
@@ -25,7 +26,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
             reference_longitude = reference_restaurant.longitude
 
             # Calcula la distancia máxima y mínima para buscar restaurantes dentro del radio
-            max_distance = radius_km
+            max_distance = float(radius_km)
             min_distance = 0
 
             # Filtra los restaurantes en el radio especificado
@@ -67,5 +68,20 @@ class UserViewSet(viewsets.ModelViewSet):
             user = User.objects.get(user_id=user_id)
             serializer = self.get_serializer(user)
             return Response(serializer.data)
+        except User.DoesNotExist:
+            return Response({'message': 'El usuario no existe.'}, status=404)
+        
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ReviewSerializer
+    lookup_field = 'user_id'  # Campo de búsqueda personalizado
+
+    def interpreter(self, request):
+        try:
+            text = request.POST.get('text')
+            print(request.POST)
+            result = predecir_texto(text)
+            return Response(result)
         except User.DoesNotExist:
             return Response({'message': 'El usuario no existe.'}, status=404)
