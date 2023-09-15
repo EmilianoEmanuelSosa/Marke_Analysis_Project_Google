@@ -17,7 +17,7 @@ export default function NearbyRestaurants() {
   useEffect(() => {
     if (!restaurant) return;
 
-    axios.get(`http://127.0.0.1:8000/api/restaurantes_en_radio/${restaurant.restaurant_id}/${km2}/?format=json`).then((response) => {
+    axios.get(`https://restauranttracking.onrender.com/api/restaurantes_en_radio/${restaurant.restaurant_id}/${km2}/?format=json`).then((response) => {
       setRestaurantList(response.data)
     })
   }, [restaurant]);

@@ -37,12 +37,10 @@ export default function Root() {
 
   const basicServicesLinks = {
     'Competidores Cercanos':'/nearby-restaurants',
-    'Categorias':'/categories',
     'Resenas':'/reviews'
   }
 
   const machineLearningServicesLinks = {
-    'Clientes Potenciales':'/potencial-clients',
     'Clasificador de Resenas':'/natural-language-interpreter',
   }
 
@@ -53,7 +51,7 @@ export default function Root() {
 
 
   return (
-    <div className="max-w-[290px] w-full h-[calc(100vh_-_72px)] px-4 py-6 bg-[#2E2E2E] flex-col flex justify-between">
+    <div className="max-w-[290px] w-full h-[calc(100vh_-_72px)] px-4 py-6 bg-[#2E2E2E] shadow-[3px_0px_3px_0px_#00000055] flex-col flex justify-between">
       <div className="flex flex-col gap-4">
         <NavSidebarLinkList 
           title={'Servicios Basico'}
@@ -69,17 +67,17 @@ export default function Root() {
         />
       </div>
       <div>
-        <nav>
-          <ul>
+        <nav className="border-t border-[#F2F3F3]">
+          <ul className="text-[#F2F3F3] mt-4 fill-[#F2F3F3]">
             <li>
-              <a className='px-4 py-2 block' href='/csv-loader'>
+              <a className='px-4 py-2 flex flex-row hover:underline underline-offset-4 gap-8' href='/csv-loader'>
                 <File />
                 Cargar Datos
               </a>
             </li>
-            <li>
+            <li >
               <ConfigBtn 
-                className=""
+                className="px-4 py-2 flex flex-row hover:underline underline-offset-4 gap-8"
               >
                 <Settings />
                 Configuracio

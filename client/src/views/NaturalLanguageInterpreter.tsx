@@ -8,7 +8,7 @@ export default function NaturalLanguageInterpreter() {
 
     const handleOnSubmit = (e: React.FormEvent) => {
       e.preventDefault()
-      axios.post('http://127.0.0.1:8000/api/interprete-languaje/', {
+      axios.post('https://restauranttracking.onrender.com/api/interprete-languaje/', {
         text: textareaRef.current?.value,
       })
       .then(function (response) {

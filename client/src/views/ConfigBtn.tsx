@@ -14,7 +14,7 @@ export default function ConfigBtn(props:React.HtmlHTMLAttributes<HTMLButtonEleme
   }}) 
   
   const onSubmit:SubmitHandler<{id:string}> = (data:{id:string}) => {
-    axios.post('http://127.0.0.1:8000/api/restaurant', data)
+    axios.post('https://restauranttracking.onrender.com/api/restaurant', data)
       .then(response => {setRestaurant(response.data)})  
       .catch(reject => console.log(reject))
     // axios.get(`${location.hash}/api/restaurantes_id/${data.id}/?format=json`)
