@@ -57,45 +57,45 @@ def get_wordnet_pos(word):
     return tag_dict.get(tag, wordnet.NOUN)
 
 # Definir la función preprocesar_texto()
-def preprocesar_texto(texto):
-    # Estos son cambios necesarios en el texto ingresado para que el modelo haga la mejor predicción
-    texto = re.sub("[^a-zA-Z]"," ",str(texto))
-    texto = texto.lower()
-    texto = nltk.word_tokenize(texto)
-    texto = [word for word in texto if len(word)>3]
-    texto = [word for word in texto if not word in stopwords]
-    texto = [wordnet_lemmatizer.lemmatize(w, get_wordnet_pos(w)) for w in texto]
-    texto = " ".join(texto)
-    texto = [texto]
-    matriz_texto = cou_vec.transform(texto)
+# def preprocesar_texto(texto):
+#     # Estos son cambios necesarios en el texto ingresado para que el modelo haga la mejor predicción
+#     texto = re.sub("[^a-zA-Z]"," ",str(texto))
+#     texto = texto.lower()
+#     texto = nltk.word_tokenize(texto)
+#     texto = [word for word in texto if len(word)>3]
+#     texto = [word for word in texto if not word in stopwords]
+#     texto = [wordnet_lemmatizer.lemmatize(w, get_wordnet_pos(w)) for w in texto]
+#     texto = " ".join(texto)
+#     texto = [texto]
+#     matriz_texto = cou_vec.transform(texto)
 
     return matriz_texto
 
-def interfaz():
-    st.title('Clasificador de Comentarios')
+# def interfaz():
+#     st.title('Clasificador de Comentarios')
     
-    # Campo de entrada para el comentario
-    comentario = st.text_input('Escribe tu comentario')
+#     # Campo de entrada para el comentario
+#     comentario = st.text_input('Escribe tu comentario')
     
-    # Botón para realizar la clasificación
-    if st.button('Clasificar'):
-        # Verificar si se ingresó un comentario
-        if comentario:
-            # Realizar la predicción utilizando el modelo cargado
-            prediction = modelo.predict(preprocesar_texto(comentario))
+#     # Botón para realizar la clasificación
+#     if st.button('Clasificar'):
+#         # Verificar si se ingresó un comentario
+#         if comentario:
+#             # Realizar la predicción utilizando el modelo cargado
+#             prediction = modelo.predict(preprocesar_texto(comentario))
 
-            # Imprimir el resultado en el formato deseado
-            if prediction == 0:
-                st.write("La reseña es mala")
-            elif prediction == 1:
-                st.write("La reseña es neutra")
-            else:
-                st.write("La reseña es buena")
-        else:
-            st.write('Por favor, ingresa un comentario antes de realizar la clasificación')
+#             # Imprimir el resultado en el formato deseado
+#             if prediction == 0:
+#                 st.write("La reseña es mala")
+#             elif prediction == 1:
+#                 st.write("La reseña es neutra")
+#             else:
+#                 st.write("La reseña es buena")
+#         else:
+#             st.write('Por favor, ingresa un comentario antes de realizar la clasificación')
 
 modelo()
 preparacion()
 randon_forest()
 nube()
-interfaz()
+# interfaz()
