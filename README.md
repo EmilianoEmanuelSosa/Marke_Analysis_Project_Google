@@ -35,7 +35,7 @@ Dicho paquete está siendo evaluada para ser implementada en una cadena de resta
 
 EL criterio para la selección de restaurantes fue su popularidad o rendimiento en sitios webs de Reseñas y críticas, para así comparar lo que nuestro paquete de servicios puede lograr en dichos restaurantes de bajo rendimeinto enfréntandolos contra aquellos que si tienen buen rendimiento.
 
-El paquete incluye los siguientas soluciones: 
+El paquete incluye los siguientas soluciones:
 
 - **Servicio API REST:** servicio para la obtención de competidores y usuarios: Esta API proporcionará a los restaurantes datos sobre sus competidores y sus clientes. Los datos de los competidores se utilizarán para identificar oportunidades de crecimiento y diferenciación. Los datos de los clientes se utilizarán para personalizar las campañas de marketing y mejorar el servicio al cliente.
 
@@ -44,6 +44,8 @@ El paquete incluye los siguientas soluciones:
 - **Análisis y dashboard interactivo:** Este análisis proporcionará a los restaurantes una visión general de su rendimiento y les ayudará a identificar áreas de mejora. El dashboard interactivo será fácil de usar y proporcionará información visual atractiva.
 
 Este paquete inicialmente se alimentará de datos obtenidsos de fuentes YELP y Google. Ambos servicios proporcionan información de localidades, y reseñas, y el análisis de sus datos nos permitirá proporcionar un análisis detallado del sector gatronómico y la evaluación preliminar de nuestros paquete de servicios.
+
+---
 
 ## <h2 align="CENTER">**`Paquete Tecnológico-Analítico`**</h2>
 
@@ -60,72 +62,35 @@ Con tla de poder obtener informacion de los competidores de nuestro cliente, se 
 <details>
   <summary>
     <code>GET</code>
-    <code><b>/api/restaurant/{id}</b></code>
+    <code><b>/api/restaurant/ {restaurant_id} </b></code>
   </summary>
+
+<br>
+
+```txt
+Este endpoint permite obtener información detallada de un restaurante por su ID.
+```
 
 #### Ejemplo de Uso
 
 ```txt
-Próximamente
+/api/restaurantes_id/0x80dd2786e6991525:0xfe0e4b2bc470d043/
 ```
 
 #### Ejemplo de Respuesta
 
-
 ```json
 {
-
+  {
+    "restaurant_id": "0x80dd2786e6991525:0xfe0e4b2bc470d043",
+    "name": "Hippo Loco",
+    "address": "Hippo Loco, 16519 Magnolia St, Westminster, CA 92683",
+    "latitude": 33.7227071,
+    "longitude": -117.9725644,
+    "rating": "5.00",
+    "review_count": 6,
+    "categories": "['Restaurant']"
 }
-```
-
-</details>
-
-#### Categorias de restaurantes
-
-<details>
-  <summary>
-    <code>GET</code>
-    <code><b>/api/categories</b></code>
-  </summary>
-
-#### Ejemplo de Uso
-
-```txt
-Próximamente
-```
-
-#### Ejemplo de Respuesta
-
-
-```json
-{
-
-}
-```
-
-</details>
-
-
-#### Restaurantes por categoría
-
-<details>
-  <summary>
-    <code>GET</code>
-    <code><b>/api/restaurant-by-categorie</b></code>
-  </summary>
-
-#### Ejemplo de Uso
-
-```txt
-Próximamente
-```
-
-#### Ejemplo de Respuesta
-
-
-```json
-{
-
 }
 ```
 
@@ -136,70 +101,75 @@ Próximamente
 <details>
   <summary>
     <code>GET</code>
-    <code><b>/api/competitors-list/{km2}</b></code>
+    <code><b>//api/restaurantes_en_radio/ {restaurant_id }/{km2}</b></code>
   </summary>
+
+<br>
+```txt
+Este endpoint permite obtener una lista de restaurantes competidores cercanos a uno específico en un radio dado.
+```
 
 #### Ejemplo de Uso
 
 ```txt
-Próximamente
-```
-
-#### Ejemplo de Respuesta
-
-
-```json
-{
-
-}
-```
-
-</details>
-
-#### Competidores Cercanos
-
-<details>
-  <summary>
-    <code>GET</code>
-    <code><b>/api/competitors/{km2}</b></code>
-  </summary>
-
-#### Ejemplo de Uso
-
-```txt
-Próximamente
+/api/restaurantes_en_radio/0x80dd2786e6991525:0xfe0e4b2bc470d043/1/
 ```
 
 #### Ejemplo de Respuesta
 
 ```json
-{
-  
-}
-```
-
-</details>
-
-#### Reviews por sentimiento
-
-<details>
-  <summary>
-    <code>GET</code>
-    <code><b>/api/reviews-by-sentiment/{sentiment}</b></code>
-  </summary>
-
-#### Ejemplo de Uso
-
-```txt
-Próximamente
-```
-
-#### Ejemplo de Respuesta
-
-```json
-{
-  
-}
+[
+  {
+    "restaurant_id": "0x80c2bd16e61206a1:0xfb13d068c2ef35b2",
+    "name": "Baja California Tacos - Broxton",
+    "address": "Baja California Tacos - Broxton, 935 Broxton Ave, Los Angeles, CA 90024",
+    "latitude": 34.062997,
+    "longitude": -118.447253,
+    "rating": "3.50",
+    "review_count": 18,
+    "categories": "['Restaurant']"
+  },
+  {
+    "restaurant_id": "0x80dc713918f62867:0xdcb64167bf937fda",
+    "name": "Fat BBQ Shack Express",
+    "address": "Fat BBQ Shack Express, 2601 Oceanside Blvd, Oceanside, CA 92054",
+    "latitude": 33.2007634,
+    "longitude": -117.3434913,
+    "rating": "4.80",
+    "review_count": 74,
+    "categories": "['Restaurant']"
+  },
+  {
+    "restaurant_id": "0x80c32a59fda495e1:0xa1f8d76c937d7e0a",
+    "name": "Coconut Bay Bar & Grill",
+    "address": "Coconut Bay Bar & Grill, 18922 Gale Ave, Rowland Heights, CA 91748",
+    "latitude": 33.9957215,
+    "longitude": -117.889782,
+    "rating": "3.70",
+    "review_count": 15,
+    "categories": "['Thai restaurant', 'Restaurant']"
+  },
+  {
+    "restaurant_id": "0x80c34f832ca90dd9:0x351eb6a65d8a9870",
+    "name": "Gru",
+    "address": "Gru, 18291 Cajon Blvd, San Bernardino, CA 92407",
+    "latitude": 34.2222088,
+    "longitude": -117.4053306,
+    "rating": "2.60",
+    "review_count": 5,
+    "categories": "['Restaurant']"
+  },
+  {
+    "restaurant_id": "0x80c2bec04aade0e7:0xf667a0dae0628311",
+    "name": "Katsu sando",
+    "address": "Katsu sando, 8162 Sunset Blvd, Los Angeles, CA 90046",
+    "latitude": 34.0973286,
+    "longitude": -118.36667,
+    "rating": "4.90",
+    "review_count": 8,
+    "categories": "['Restaurant']"
+  }
+]
 ```
 
 </details>
@@ -209,22 +179,68 @@ Próximamente
 <details>
   <summary>
     <code>GET</code>
-    <code><b>/api/review-of-restaurant/{id}</b></code>
+    <code><b>/api/restaurantes_reviews/ {str:restaurant_id} / </b></code>
   </summary>
+
+<br>
+
+```txt
+Este endpoint permite obtener las reseñas de un restaurante por su ID.
+```
 
 #### Ejemplo de Uso
 
 ```txt
-Próximamente
+/api/restaurantes_reviews/9OG5YkX1g2GReZM0AskizA/
 ```
 
 #### Ejemplo de Respuesta
 
 ```json
-{
-  
-}
+[
+  {
+    "review_id": 391944,
+    "rating": 4,
+    "text": "Great bar Happy Hour 4-7 every day. Wine & Drafts $3, $5 pizza, $4.50 apps. To-go Dinners and lunches are very reasonable and fast. Staff are as friendly as it gets.",
+    "time": "2016-01-30",
+    "user": "f10WH1fXhy-68r4AEEhAWA",
+    "restaurant": "9OG5YkX1g2GReZM0AskizA"
+  },
+  {
+    "review_id": 391945,
+    "rating": 5,
+    "text": "Great bar Happy Hour 4-7 every day. Wine & Drafts $3, $5 pizza, $4.50 apps. To-go Dinners and lunches are very reasonable and fast. Staff are as friendly as it gets.\n\nLove the HH Pizzas. A flatbread style thin crust pepperoni and only  $5.  Peroni, Sam Adams Seasonal, Icky and BudLite on tap.",
+    "time": "2016-02-27",
+    "user": "f10WH1fXhy-68r4AEEhAWA",
+    "restaurant": "9OG5YkX1g2GReZM0AskizA"
+  },
+  {
+    "review_id": 391946,
+    "rating": 1,
+    "text": "Please, this place makes a semi-new menu and raised their prices. The food is very mediocre. i just started cooking and i make a couple pasta dishes which include spaghetti and lemon chicken piccatta.  As a beginner in cooking I can judge this place's food is horrible. A day after the food looked like it had been out for weeks. Good food can last for a day or two.When i went in there to eat the hostess was nice. first, we ordered a glass a wine. he poured the wine, missed the glass and some spilled on the table and he just ignored it. hello. idiot. waitressing 101. go back. well needless to say. not worth your money at all. ive been there during happy hour with girlfriends and its fine. not a 'high end' restaurant by any means even though they try to make it that way.",
+    "time": "2013-04-11",
+    "user": "-TbX3AYOIEyo6-b67MT8eA",
+    "restaurant": "9OG5YkX1g2GReZM0AskizA"
+  },
+  {
+    "review_id": 391947,
+    "rating": 1,
+    "text": "Food showed up cold, salmon was raw inside, plastic in the dessert, fatty lamb chops and some sort of stringy thing at the bottom of my wine glass!! The service was great though.",
+    "time": "2016-04-23",
+    "user": "mR1GTyurdcuhq7LE90V2Eg",
+    "restaurant": "9OG5YkX1g2GReZM0AskizA"
+  },
+  {
+    "review_id": 391948,
+    "rating": 5,
+    "text": "Troy and his staff always make it a really good time at the Macaroni Grill I've been here several times for birthdays and special events they've always taken care of us.\nFantastic food fantastic people.\nNever had a bad time here.",
+    "time": "2017-04-30",
+    "user": "zira3StlLXuENbbnTvNhMg",
+    "restaurant": "9OG5YkX1g2GReZM0AskizA"
+  }
+]
 ```
+
 </details>
 
 #### Usuario
@@ -232,33 +248,43 @@ Próximamente
 <details>
   <summary>
     <code>GET</code>
-    <code><b>/api/user/{id}</b></code>
+    <code><b>/api/usuarios/ {str:user_id} /</b></code>
   </summary>
+
+<br>
+
+```txt
+Este endpoint permite obtener información de un usuario por su ID.
+```
 
 #### Ejemplo de Uso
 
 ```txt
-Próximamente
+/api/usuarios/f10WH1fXhy-68r4AEEhAWA
 ```
 
 #### Ejemplo de Respuesta
 
 ```json
 {
-  
+  "user_id": "f10WH1fXhy-68r4AEEhAWA",
+  "name": "Brian"
 }
 ```
 
 </details>
 
+---
 
+### Modelos de Machine Learning
 
-###  Modelos de Machine Learning
 Con tla de poder obtener informacion de los competidores de nuestro cliente, se desarrollara un Servicio Api REST Ful para obtentener. Este servicio se desplejara en la web, ynuestro cliente podra acceder a el para obtener informacion reeavante de la empresa.
 
-- **Modelo de clasificación:**  En base a las opniones y reviews de los usuarios que participan en paginas web de reviews, podemos desarrolar un modelo de clasificacion de usuarios. Este modelo clasificará que tipo de clientes son potenciales nuevos clientes para formar parte de una campaña de marketing.
+- **Modelo de clasificación:** En base a las opniones y reviews de los usuarios que participan en paginas web de reviews, podemos desarrolar un modelo de clasificacion de usuarios. Este modelo clasificará que tipo de clientes son potenciales nuevos clientes para formar parte de una campaña de marketing.
 
 - **Sistema de Scoring con Lenguaje natural:** Se usarán las opiniones de los clientes o reviews, para crear un modelo que determinará que tan positivia o negativa es la opinión de un cliente. Este modelo está pensado para hacer una inspección rapida de las reviews de los clientes filtrandolas según si son positivas o negativas.
+
+---
 
 - **KPI N°1: Aumento de la Cantidad de Reseñas de Clientes a lo Largo de un Año.**
 
@@ -288,7 +314,7 @@ Con tla de poder obtener informacion de los competidores de nuestro cliente, se 
 **Fórmula**: ((Clientes al final del período - Nuevos clientes durante el período) / Clientes al inicio del período) x 100
 **Interpretación**: Una alta retención de clientes indica la satisfacción y el valor continuo que los clientes encuentran en los servicios de la empresa. Una baja retención podría indicar problemas en la calidad del servicio o la necesidad de mejorar el soporte al cliente.
 
-**Detalle**: Esta métrica en cuanto a la cantidad de clientes, se toma a partir de la cantidad de Reviews que se tienen. Y 
+**Detalle**: Esta métrica en cuanto a la cantidad de clientes, se toma a partir de la cantidad de Reviews que se tienen. Y
 
 - **KPI N°4: Análisis de Conveniencia de Ubicación Basado en Turismo y Cantidad de Reseñas.**
 
@@ -309,7 +335,6 @@ Por Redactar
 ---
 
 ## <h2 align="CENTER">**`Desarrollo del Proyecto`**</h2>
-
 
 ### Pipeline
 
@@ -350,12 +375,12 @@ Get to know our project, cloning the repository on your computer
   | <div style="width:150px"><img src = 'src/profiles_photos/Emiliano.jpeg' height = 150>  <div align="center" ><a href="https://github.com/EmilianoEmanuelSosa">Emiliano Sosa</a></div><div align="center" >Ingeniero de Datos</div><div align="center" >Ingeniero ML</div><</div> |  <div style="width:150px; display:inline-block"><img src = 'src/profiles_photos/Franco.jpeg' height = 150> <div align="center" ><a href="https://github.com/franco18min">Franco Aguilera</a></div><div align="center" >Ingeniero de Datos</div><div align="center" >Ingeniero ML</div></div> | <div style="width:150px; display:inline-block"><img src = 'src/profiles_photos/GabrielU.jpeg' height = 150>  <div align="center" ><a href="https://github.com/Gabo10DV">Gabriel Urbina</a></div><div align="center" >Ingeniero de Datos</div><div align="center" >Analista de Datos</div></div> |
   | :---: | :---: | :---: |
 
-
 </div>
 <div align=center>
 
-  | <div style="width:150px"><img src = 'src/profiles_photos/Matias.jpeg' height = 150> <div align="center" ><a href="https://github.com/https://github.com/PrismaPsy">Matías Ponce</a></div><div align="center" >Ingeniero de Datos</div><div align="center" >Analista de Datos</div></div>  | <div style="width:150px"><img src = 'src/profiles_photos/Ricardo.jpeg' height = 150><div align="center" ><a href="https://github.com/Rickhersd">Ricardo Sánchez</a></div><div align="center" >Analista Funcional</div></div> |
-  | :---: | :---: |
+| <div style="width:150px"><img src = 'src/profiles_photos/Matias.jpeg' height = 150> <div align="center" ><a href="https://github.com/https://github.com/PrismaPsy">Matías Ponce</a></div><div align="center" >Ingeniero de Datos</div><div align="center" >Analista de Datos</div></div> | <div style="width:150px"><img src = 'src/profiles_photos/Ricardo.jpeg' height = 150><div align="center" ><a href="https://github.com/Rickhersd">Ricardo Sánchez</a></div><div align="center" >Analista Funcional</div></div> |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+
 </div>
 
 <br />
