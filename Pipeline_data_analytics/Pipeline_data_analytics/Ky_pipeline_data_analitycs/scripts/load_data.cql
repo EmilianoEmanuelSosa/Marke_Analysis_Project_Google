@@ -1,0 +1,1 @@
+COPY db_casandra.reviews (user_id, restaurant_id, stars, date) FROM '/ruta/Data_process/reviews_whitout_text.csv' WITH HEADER = true;

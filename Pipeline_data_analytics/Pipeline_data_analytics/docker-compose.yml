@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  cassandra:
+    build:
+      context: .
+      dockerfile: Ky_pipeline_data_analitycs/Dockerfile
+    container_name: db_cassandra
+    ports:
+      - "9042:9042"
+    env_file:
+      - ./Ky_pipeline_data_analitycs/.env
+    command: /Ky_pipeline_data_analitycs/entrypoint.sh
+    volumes:
+      - /home/mkm/programin/Marke_Analysis_Project_Google/Data:/ruta/
+    networks:
+      - mynetwork2
+    depends_on:
+      - kafka
+
+  db_google:
+    container_name: db_postgres
+    build:
+      context: ./db_postgres
+    env_file:
+      - ./db_postgres/.env
+    command: /db_google/entrypoint.sh
+    volumes:
+      - "./db_postgres/data/:/var/lib/postgresql/data:rw"
+    ports:
+      - "5435:5432"  # Debería ser 5432, que es el puerto por defecto de PostgreSQL
+    networks:
+      - mynetwork2
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    networks:
+      - mynetwork2
+
+  kafka-producer:
+    build:
+      context: ./kafkaProducer/Dockerfile
+    container_name: kafka_producer
+    depends_on:
+      - kafka
+    networks:
+      - mynetwork2
+
+  pyspark-consumer:
+    build:
+      context: './pysparkConsumer/Dockerfile'
+    depends_on:
+      - kafka
+      - spark  # Agregamos una dependencia a un servicio Spark
+    networks:
+      - mynetwork2
+
+  spark:
+    image: bitnami/spark:latest  # Puedes utilizar una imagen de Spark existente
+    container_name: spark
+    ports:
+      - "7077:7077"  # Puertos de Spark para la interfaz web y el cluster
+      - "8080:8080"
+    environment:
+      - SPARK_MODE=master
+    networks:
+      - mynetwork2
+
+networks:
+  mynetwork2:
