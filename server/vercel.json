@@ -1,14 +1,14 @@
 {
     "builds": [
       {
-        "src": "server/Google_yelp_Proyect/wsgi.py",
+        "src": "Google_yelp_Proyect/wsgi.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "server/Google_yelp_Proyect/wsgi.py"
+        "dest": "Google_yelp_Proyect/wsgi.py"
       }
     ]
   }
