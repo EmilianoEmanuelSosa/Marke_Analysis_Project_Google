@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import { useState} from 'react'
 import CSVDataTable from "../components/CSVDataTable";
 import { FileUploader } from "react-drag-drop-files";
 import Papa from 'papaparse'
@@ -33,8 +33,8 @@ export default function CSVLoader() {
 
   const [csvData, setCsvData] = useState<{[key: string]:string}[]>([{}]);
   const [numberForPage, setNumberOfPage] = useState<number>(1000);
-  const [limitRows, setLimitRows] = useState<number>(10000);
-  const [page, setPage] = useState<number>(1);
+  const [limitRows, ] = useState<number>(10000);
+  const [page, ] = useState<number>(1);
   const [file, setFile] = useState<File | undefined>(undefined);
 
   const clamp = (num:number, min:number, max:number) => Math.min(Math.max(num, min), max);
@@ -51,11 +51,11 @@ export default function CSVLoader() {
     setFile(undefined)
   }
 
-  const handleUpload = () => {
-    // TO-DO: Conectar Enpoint 
+  // const handleUpload = () => {
+  //   // TO-DO: Conectar Enpoint 
     
-    setFile(undefined)
-  }
+  //   setFile(undefined)
+  // }
 
   const handleFileChange = (csv_file: File) => {
     if (!csv_file) return  
@@ -65,10 +65,12 @@ export default function CSVLoader() {
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
       const csvText = e.target?.result;
+      // @ts-ignore
       const {data} = Papa.parse(csvText, {header:true}) 
     
       const parsedData: {[key: string]:string}[] = [];
-
+      
+      // @ts-ignore
       data.forEach(row => {
         parsedData.push(row);
       });

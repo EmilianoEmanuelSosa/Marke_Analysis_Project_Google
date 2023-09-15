@@ -8,5 +8,7 @@ server/task/migrations/__pycache__
 server/main.ipynb
 a.json
 server/main.ipynb
-db_Google/*
+DB_google
 Pipeline_data_analytics/my_venv
+*/__pycache__
+__pycache__
