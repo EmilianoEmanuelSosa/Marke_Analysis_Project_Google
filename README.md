@@ -67,7 +67,7 @@ Con tla de poder obtener informacion de los competidores de nuestro cliente, se 
 
 <br>
 
-```txt
+``` txt
 Este endpoint permite obtener información detallada de un restaurante por su ID.
 ```
 
@@ -105,6 +105,7 @@ Este endpoint permite obtener información detallada de un restaurante por su ID
   </summary>
 
 <br>
+
 ```txt
 Este endpoint permite obtener una lista de restaurantes competidores cercanos a uno específico en un radio dado.
 ```
